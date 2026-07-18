@@ -1,8 +1,17 @@
 import { Queue } from "bullmq";
 import { redis } from "./redis.js";
 import { logger } from "./logger.js";
+import { getTemplate } from "./template/index.js";
 
-export const emailQueue = new Queue("email", {
+export interface EmailJobData {
+  template: keyof typeof getTemplate;
+  to: string;
+  subject: string;
+  payload: Record<string, string>;
+  text?: string;
+}
+
+export const emailQueue = new Queue<EmailJobData>("email", {
   connection: redis,
 });
 
