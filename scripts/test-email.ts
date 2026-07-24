@@ -6,7 +6,7 @@ async function produceTestJob() {
     logger.info("Adding a test email job to the queue...");
 
     const job = await emailQueue.add("send-test-email", {
-      template: "test-template",
+      template: "welcome-email",
       to: "test@example.com",
       subject: "Hello from Email Worker Service",
       payload: { name: "Test User" },

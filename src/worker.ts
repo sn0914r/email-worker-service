@@ -15,7 +15,7 @@ const worker = new Worker<EmailJobData, void, string>(
 
     const { to, subject, payload, text } = job.data;
 
-    await sendMail({ to, subject, html: targetTemplate(payload), text });
+    await sendMail({ to, subject, html: targetTemplate(payload as any), text });
   },
   {
     connection: redis,
